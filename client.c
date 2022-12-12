@@ -3,42 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: fvieira <fvieira@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:44:35 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/09 15:44:37 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/12 20:32:17 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "minitalk.h"
+#include "minitalk.h"
 
 void	sendsignal(char *str, pid_t p)
 {
-	int	count;
+	int				count;
 	unsigned char	c;
-	int	bit;
+	int				bit;
 
 	count = 0;
 	while (str[count] != '\0')
 	{
-		c = str[count];
+		c = (unsigned char) str[count];
 		bit = 0;
 		while (bit < 8)
 		{
 			if (c & 0b00000001)
-			{
-				if(kill(p, SIGUSR1) != 0)
-					exit(0);
-			}
+				kill(p, SIGUSR1);
 			else
-			{
-				if(kill(p, SIGUSR2) != 0)
-					exit(0);
-			}
+				kill(p, SIGUSR2);
 			c >>= 1;
 			bit++;
+			usleep(30);
 		}
-		usleep(300);
 		count++;
 	}
 }
@@ -46,17 +40,14 @@ void	sendsignal(char *str, pid_t p)
 int	main(int argc, char **argv)
 {
 	pid_t	p;
-	char	*str;
 
 	if (argc != 3)
 		return (0);
 	p = ft_atoi(argv[1]);
-	str = argv[2];
-	sendsignal(str, p);
+	sendsignal(argv[2], p);
 	return (0);
-
-}*/
- #include "utils.h"
+}
+/*#include "utils.h"
 
 void	send_letter(pid_t spid, unsigned char c)
 {
@@ -101,4 +92,4 @@ int	main(int argc, char **argv)
 	spid = ft_atoi(argv[1]);
 	send_message(spid, argv[2]);
 	return (EXIT_SUCCESS);
-}
+}*/
