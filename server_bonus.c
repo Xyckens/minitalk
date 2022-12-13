@@ -6,13 +6,13 @@
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:13:18 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/13 13:41:51 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/13 17:29:21 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-unsigned char   *frase = 0;
+unsigned char	*g_frase = 0;
 
 void	handler(int signal, siginfo_t *info, void *ucontent)
 {
@@ -26,13 +26,12 @@ void	handler(int signal, siginfo_t *info, void *ucontent)
 	counter++;
 	if (counter == 8)
 	{
-		frase = ft_alt_strjoin(frase, bin);
+		g_frase = ft_alt_strjoin(g_frase, bin);
 		if (bin == '\0')
 		{
-			ft_printf("%s",frase);
-			free(frase);
+			ft_printf("%s", g_frase);
+			free(g_frase);
 			kill(info->si_pid, SIGUSR1);
-			exit(1);
 		}
 		bin = 0;
 		counter = 0;

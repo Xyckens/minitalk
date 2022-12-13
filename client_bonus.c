@@ -6,7 +6,7 @@
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:13:15 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/13 13:35:12 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/13 17:27:08 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	sendsignal(char *str, pid_t p)
 	int				count;
 	unsigned char	c;
 	int				bit;
+	int				lenstr;
 
 	count = 0;
-	while (str[count] != '\0')
+	lenstr = ft_strlen(str);
+	while (count <= lenstr)
 	{
 		c = (unsigned char) str[count];
 		bit = 0;
@@ -62,9 +64,9 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		return (0);
 	p = ft_atoi(argv[1]);
-    signaltreatment();
+	signaltreatment();
 	sendsignal(argv[2], p);
-    while(1)
+	while (1)
 		pause();
 	return (0);
 }
