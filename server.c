@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fvieira <fvieira@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:44:23 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/12 19:31:26 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/13 12:36:34 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
 
 void	handler(int signal)
 {
@@ -42,10 +41,8 @@ void	signaltreatment(void)
 		exit(1);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	(void)argc;
-	(void)argv;
 	ft_printf("Boring message to tell you pid = %d\n", getpid());
 	signaltreatment();
 	while (1)

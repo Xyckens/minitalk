@@ -6,7 +6,7 @@
 #    By: fvieira <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 15:44:06 by fvieira           #+#    #+#              #
-#    Updated: 2022/12/09 15:44:10 by fvieira          ###   ########.fr        #
+#    Updated: 2022/12/13 13:45:05 by fvieira          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,20 @@ $(SERVER):
 
 clean:
 	$(MAKE) clean -C ./libft
-	rm -rf client server
+	rm -rf client server client_bonus server_bonus
 
 fclean: clean
 	$(MAKE) fclean -C ./libft
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus:
+	$(MAKE) --no-print-directory -C ./libft
+	$(CC) $(CFLAGS) auxil.c client_bonus.c $(LIBFT) -o client_bonus
+	echo ".client_bonus created"
+	$(CC) $(CFLAGS) auxil.c server_bonus.c $(LIBFT) -o server_bonus
+	echo ".server_bonus created"
+	
+.PHONY: all clean fclean re bonus
 
 .SILENT:

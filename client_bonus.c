@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 15:44:35 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/13 12:29:50 by fvieira          ###   ########.fr       */
+/*   Created: 2022/12/13 12:13:15 by fvieira           #+#    #+#             */
+/*   Updated: 2022/12/13 13:35:12 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,24 @@ void	sendsignal(char *str, pid_t p)
 	}
 }
 
+void	handler(int signal)
+{
+	if (signal == SIGUSR1)
+		ft_printf("Message received!");
+}
+
+void	signaltreatment(void)
+{
+	struct sigaction	action;
+
+	action.sa_handler = &handler;
+	action.sa_flags = SA_SIGINFO;
+	if (sigaction(SIGUSR1, &action, NULL) == -1)
+		exit(1);
+	if (sigaction(SIGUSR2, &action, NULL) == -1)
+		exit(1);
+}
+
 int	main(int argc, char **argv)
 {
 	pid_t	p;
@@ -44,52 +62,9 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		return (0);
 	p = ft_atoi(argv[1]);
+    signaltreatment();
 	sendsignal(argv[2], p);
+    while(1)
+		pause();
 	return (0);
 }
-/*#include "utils.h"
-
-void	send_letter(pid_t spid, unsigned char c)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("Sending 0x%X (%c)\n", c, c);
-	while (i++ < 8)
-	{
-		if (c & 0b00000001)
-		{
-			if (kill(spid, SIGUSR1) == -1)
-				print_error("kill(): couldn't transmit bit to server\n");
-		}
-		else
-		{
-			if (kill(spid, SIGUSR2) == -1)
-				print_error("kill(): couldn't transmit bit to server\n");
-		}
-		c >>= 1;
-		usleep(100);
-	}
-}
-
-void	send_message(pid_t spid, char *msg)
-{
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	len = ft_strlen(msg);
-	while (i <= len)
-		send_letter(spid, msg[i++]);
-}
-
-int	main(int argc, char **argv)
-{
-	pid_t	spid;
-
-	if (argc != 3)
-		print_usage(argv[0]);
-	spid = ft_atoi(argv[1]);
-	send_message(spid, argv[2]);
-	return (EXIT_SUCCESS);
-}*/
