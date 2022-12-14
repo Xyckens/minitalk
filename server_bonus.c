@@ -6,7 +6,7 @@
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:13:18 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/13 17:29:21 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/14 12:32:12 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	handler(int signal, siginfo_t *info, void *ucontent)
 		{
 			ft_printf("%s", g_frase);
 			free(g_frase);
+			g_frase = 0;
 			kill(info->si_pid, SIGUSR1);
 		}
 		bin = 0;

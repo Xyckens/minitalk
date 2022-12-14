@@ -6,7 +6,7 @@
 /*   By: fvieira <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:57:05 by fvieira           #+#    #+#             */
-/*   Updated: 2022/12/13 17:08:23 by fvieira          ###   ########.fr       */
+/*   Updated: 2022/12/14 12:32:44 by fvieira          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ unsigned char	*ft_alt_strjoin(unsigned char *s1, unsigned char c)
 	int				len_s1;
 	int				counter;
 	unsigned char	*str;
-
 
 	counter = 0;
 	len_s1 = 0;
@@ -38,12 +37,3 @@ unsigned char	*ft_alt_strjoin(unsigned char *s1, unsigned char c)
 		free(s1);
 	return (str);
 }
-/*#include <stdio.h>
-int	main(void)
-{
-	unsigned char *s;
-	unsigned char c = '7';
-	s= 0;
-	
-	printf("%s",ft_alt_strjoin(s,c));
-}*/
